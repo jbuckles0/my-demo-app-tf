@@ -20,7 +20,7 @@ provider "hcp" {}
 
 locals {
   tags = {
-    Name = "My Demo App"
+    Name = "My Demo App - ${var.environment_tag}"
     Environment = var.environment_tag
     ManagedBy = "terraform"
   }
