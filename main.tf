@@ -18,10 +18,9 @@ provider "aws" {
 
 provider "hcp" {}
 
-//TODO: ADD TAGS LOCAL VARIABLE WITH ENVIROMENT
 locals {
   tags = {
-    Name = "My Demo App"
+    Name = "My Demo App - ${var.environment_tag}"
     Environment = var.environment_tag
     ManagedBy = "terraform"
   }
@@ -53,4 +52,6 @@ resource "aws_instance" "web" {
   vpc_security_group_ids      = [module.vpc.vpc_security_group_id]
   associate_public_ip_address = true
 
+  tags = local.tags
 }
+
