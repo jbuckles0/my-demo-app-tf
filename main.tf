@@ -28,8 +28,10 @@ locals {
 
 module "vpc" {
   source  = "app.terraform.io/jacobbuckles-org/vpc/aws"
-  version = "0.0.1"
+  version = "0.0.2"
 
+  cidr_vpc = "10.1.0.0/16"
+  cidr_subnet = "10.1.0.0/24"
   tags = local.tags
 }
 
