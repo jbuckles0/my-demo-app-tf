@@ -16,8 +16,6 @@ provider "aws" {
   region = "us-east-2"
 }
 
-provider "hcp" {}
-
 locals {
   tags = {
     Name = "My Demo App - ${var.environment_tag}"
@@ -33,18 +31,6 @@ module "vpc" {
   cidr_vpc = "10.1.0.0/16"
   cidr_subnet = "10.1.0.0/24"
   tags = local.tags
-}
-
-data "hcp_packer_iteration" "ubuntu" {
-  bucket_name = "packer-demo"
-  channel     = "development"
-}
-
-data "hcp_packer_image" "ubuntu_us_east_2" {
-  bucket_name    = "packer-demo"
-  cloud_provider = "aws"
-  iteration_id   = data.hcp_packer_iteration.ubuntu.ulid
-  region         = "us-east-2"
 }
 
 resource "aws_instance" "web" {
