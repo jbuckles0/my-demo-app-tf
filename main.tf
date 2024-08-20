@@ -1,9 +1,5 @@
 terraform {
   required_providers {
-    hcp = {
-      source  = "hashicorp/hcp"
-      version = "~> 0.94.1"
-    }
     aws = {
       source  = "hashicorp/aws"
       version = "~> 4.42.0"
@@ -34,7 +30,7 @@ module "vpc" {
 }
 
 resource "aws_instance" "web" {
-  ami                         = data.hcp_packer_image.ubuntu_us_east_2.cloud_image_id
+  ami                         = "ami-08c40ec9ead489470"
   instance_type               = "t2.micro"
   subnet_id                   = module.vpc.subnet_id
   vpc_security_group_ids      = [module.vpc.vpc_security_group_id]
