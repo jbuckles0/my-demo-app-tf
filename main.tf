@@ -4,6 +4,10 @@ terraform {
       source  = "hashicorp/aws"
       version = "~> 4.42.0"
     }
+    hcp = {
+      source  = "hashicorp/hcp"
+      version = "~> 0.94.1"
+    }
   }
   required_version = ">= 0.14.5"
 }
@@ -30,7 +34,7 @@ module "vpc" {
 }
 
 resource "aws_instance" "web" {
-  ami                         = "ami-08c40ec9ead489470"
+  ami                         = data.hcp_packer_image.ubuntu_us_east_2.cloud_image_id
   instance_type               = "t2.micro"
   subnet_id                   = module.vpc.subnet_id
   vpc_security_group_ids      = [module.vpc.vpc_security_group_id]
