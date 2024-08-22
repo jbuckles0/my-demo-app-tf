@@ -1,13 +1,8 @@
 provider "hcp" {}
 
-data "hcp_packer_iteration" "ubuntu" {
-  bucket_name = "packer-demo"
-  channel     = "development"
-}
-
-data "hcp_packer_image" "ubuntu_us_east_2" {
-  bucket_name    = "packer-demo"
-  cloud_provider = "aws"
-  iteration_id   = data.hcp_packer_iteration.ubuntu.ulid
-  region         = "us-east-2"
+data "hcp_packer_artifact" "ubuntu-east" {
+  bucket_name  = "packer-demo"
+  channel_name = "development"
+  platform     = "aws"
+  region       = "us-east-2"
 }

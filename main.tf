@@ -34,7 +34,7 @@ module "vpc" {
 }
 
 resource "aws_instance" "web" {
-  ami                         = data.hcp_packer_image.ubuntu_us_east_2.cloud_image_id
+  ami                         = data.hcp_packer_artifact.ubuntu-east.external_identifier
   instance_type               = "t2.micro"
   subnet_id                   = module.vpc.subnet_id
   vpc_security_group_ids      = [module.vpc.vpc_security_group_id]
