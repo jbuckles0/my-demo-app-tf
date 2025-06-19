@@ -43,3 +43,13 @@ resource "aws_instance" "web" {
   tags = local.tags
 }
 
+resource "aws_instance" "new_server" {
+  ami                         = data.hcp_packer_artifact.ubuntu-east.external_identifier
+  instance_type               = "t2.small"
+  subnet_id                   = module.vpc.subnet_id
+  vpc_security_group_ids      = [module.vpc.vpc_security_group_id]
+  associate_public_ip_address = true
+
+  tags = local.tags
+}
+
